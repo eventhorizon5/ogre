@@ -81,11 +81,11 @@ Ogre::Real Widget::getCaptionWidth(const Ogre::DisplayString &caption, Ogre::Tex
         if (caption[i] == ' ')
         {
             if (area->getSpaceWidth() != 0) lineWidth += area->getSpaceWidth();
-            else lineWidth += font->getGlyphInfo(' ').advance * area->getCharHeight();
+            else lineWidth += font->getGlyphAspectRatio(' ') * area->getCharHeight();
         }
         else if (caption[i] == '\n') break;
         // use glyph information to calculate line width
-        else lineWidth += font->getGlyphInfo(caption[i]).advance * area->getCharHeight();
+        else lineWidth += font->getGlyphAspectRatio(caption[i]) * area->getCharHeight();
     }
 
     return (unsigned int)lineWidth;
@@ -105,7 +105,7 @@ void Widget::fitCaptionToArea(const Ogre::DisplayString &caption, Ogre::TextArea
     for (unsigned int i = 0; i < s.length(); i++)
     {
         if (s[i] == ' ' && area->getSpaceWidth() != 0) width += area->getSpaceWidth();
-        else width += f->getGlyphInfo(s[i]).advance * area->getCharHeight();
+        else width += f->getGlyphAspectRatio(s[i]) * area->getCharHeight();
         if (width > maxWidth)
         {
             s = s.substr(0, i);
@@ -247,7 +247,7 @@ void TextBox::setText(const Ogre::DisplayString &text)
         if (current[i] == ' ')
         {
             if (mTextArea->getSpaceWidth() != 0) lineWidth += mTextArea->getSpaceWidth();
-            else lineWidth += font->getGlyphInfo(' ').advance * mTextArea->getCharHeight();
+            else lineWidth += font->getGlyphAspectRatio(' ') * mTextArea->getCharHeight();
             firstWord = false;
             lastSpace = i;
         }
@@ -261,7 +261,7 @@ void TextBox::setText(const Ogre::DisplayString &text)
         else
         {
             // use glyph information to calculate line width
-            lineWidth += font->getGlyphInfo(current[i]).advance * mTextArea->getCharHeight();
+            lineWidth += font->getGlyphAspectRatio(current[i]) * mTextArea->getCharHeight();
             if (lineWidth > rightBoundary)
             {
                 if (firstWord)

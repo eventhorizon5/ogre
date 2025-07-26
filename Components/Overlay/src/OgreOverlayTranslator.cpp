@@ -92,8 +92,8 @@ void FontTranslator::parseAttribute(ScriptCompiler* compiler, FontPtr& pFont,
             // Direct character
             cp = val[0];
         }
-        pFont->setGlyphInfoFromTexCoords(
-            cp, FloatRect(coords[0], coords[1], coords[2], coords[3])); // assume image is square
+        pFont->setGlyphTexCoords(cp, coords[0], coords[1], coords[2], coords[3],
+                                 1.0); // assume image is square
     }
     else if (attrib == "antialias_colour")
     {
@@ -216,9 +216,6 @@ void ElementTranslator::translate(ScriptCompiler* compiler, const AbstractNodePt
             {
                 succ = getString(prop->values.front(), &val);
             }
-
-            if(prop->name == "space_width")
-                compiler->addError(ScriptCompiler::CE_DEPRECATEDSYMBOL, prop->file, prop->line, prop->name);
 
             if(!succ || !newElement->setParameter(prop->name, val))
                 compiler->addError(ScriptCompiler::CE_INVALIDPARAMETERS, prop->file, prop->line);
