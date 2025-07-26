@@ -582,10 +582,10 @@ namespace Ogre
         // D3D9 uses row vectors i.e. V*M
         // Ogre, OpenGL and everything else uses column vectors i.e. M*V
         return D3DMATRIX{
-            mat[0][0], mat[1][0], mat[2][0], mat[3][0],
-            mat[0][1], mat[1][1], mat[2][1], mat[3][1],
-            mat[0][2], mat[1][2], mat[2][2], mat[3][2],
-            mat[0][3], mat[1][3], mat[2][3], mat[3][3]};
+            (float)mat[0][0], (float)mat[1][0], (float)mat[2][0], (float)mat[3][0],
+            (float)mat[0][1], (float)mat[1][1], (float)mat[2][1], (float)mat[3][1],
+            (float)mat[0][2], (float)mat[1][2], (float)mat[2][2], (float)mat[3][2],
+            (float)mat[0][3], (float)mat[1][3], (float)mat[2][3], (float)mat[3][3]};
     }
     //---------------------------------------------------------------------
     Matrix4 D3D9Mappings::convertD3DXMatrix( const D3DMATRIX& mat )
